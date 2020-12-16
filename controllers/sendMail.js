@@ -64,9 +64,6 @@ const sendEmail = (to, url, txt) => {
             return infor;
           }
     })
-
-    console.log({smtpTransport})
-    console.log({mailOptions})
 }
 
 module.exports = sendEmail
