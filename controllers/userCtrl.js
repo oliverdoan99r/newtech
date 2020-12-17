@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendMail = require('./sendMail')
 
+
 const {CLIENT_URL} = process.env
 
 const userCtrl = {
@@ -99,7 +100,23 @@ const userCtrl = {
 
             })
         } catch (err) {
-            return res.status(500).json({msg: 'Please login now!'})
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    fogotPassword: async (req, res) =>{
+        try {
+            const {email} = req.body
+            const user = await Users.findOne({email})
+            if(!user) return res.status(400).json({msg: "This email does not exist."})
+
+            const access_token = createAccessToken({id: user._id})
+            const url = `${CLIENT_URL}/user/reset/${access_token}`
+
+            sendMail(email, url, "Reset your password")
+            res.json({msg: "Re-send the password, please check your email."})
+
+        } catch (error) {
+            return res.status(500).json({msg: err.message})
         }
     }
 }
