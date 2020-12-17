@@ -18,4 +18,6 @@ router.post('/reset', auth, userCtrl.resetPassword)
 router.get('/infor', auth, userCtrl.getUserInfor)
 
 router.get('/all_infor',auth, authAdmin, userCtrl.getUsersAllInfor)
+
+router.get('/logout',userCtrl.logout)
 module.exports = router
