@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "https://res.cloudinary.com/lucy123/image/upload/v1607699113/avatar/avatar_cugq40.png"
+    },
+    cart: {
+        type: Array,
+        default: []
     }
 }, {
     timestamps: true
