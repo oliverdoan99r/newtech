@@ -28,8 +28,23 @@ const uploadCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
+    },
+    uploadImgAdmin: (req, res) => {
+        try {
+            const file = req.files.file;
+            
+            cloudinary.v2.uploader.upload(file.tempFilePath, {folder: "test"}, async(err, result)=>{
+                if(err) throw err;
+    
+                removeTmp(file.tempFilePath)
+    
+                res.json({public_id: result.public_id, url: result.secure_url})
+            })    
+        
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
     }
-
 }
 
 
