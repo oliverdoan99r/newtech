@@ -1,6 +1,7 @@
 const Products = require('../models/productModel')
 
 // Filter, sorting and paginating
+
 class APIfeatures {
     constructor(query, queryString){
         this.query = query;
@@ -23,17 +24,18 @@ class APIfeatures {
          
        return this;
     }
-
+ 
     sorting(){
         if(this.queryString.sort){
             const sortBy = this.queryString.sort.split(',').join(' ')
+            //console.log(sortBy)
             this.query = this.query.sort(sortBy)
         }else{
-            this.query = this.query.sort('-createdAt')
+            this.query = this.query.sort('createdAt')
         }
 
         return this;
-    }
+    } 
 
     paginating(){
         const page = this.queryString.page * 1 || 1
@@ -41,7 +43,7 @@ class APIfeatures {
         const skip = (page - 1) * limit;
         this.query = this.query.skip(skip).limit(limit)
         return this;
-    }
+    } 
 }
 
 const productCtrl = {
@@ -70,13 +72,13 @@ const productCtrl = {
             const product = await Products.findOne({product_id})
             if(product)
                 return res.status(400).json({msg: "This product already exists."})
-            
+
             const newProduct = new Products({
                 product_id, title: title.toLowerCase(), price, description, content, images, category
             })
 
             await newProduct.save()
-            res.json({msg: "Created a product"}) 
+            res.json({msg: "Created a product"})
 
         } catch (err) {
             return res.status(500).json({msg: err.message})
@@ -105,5 +107,6 @@ const productCtrl = {
         }
     }
 }
+
 
 module.exports = productCtrl

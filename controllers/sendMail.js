@@ -1,17 +1,18 @@
 const nodemailer = require('nodemailer')
 const {google} = require('googleapis')
 const {OAuth2} = google.auth;
-const  MAILING_SERVICE_CLIENT_ID ='1025999669036-m1cjtdr24te1g83abphl76thrcljko6i.apps.googleusercontent.com'
-const  MAILING_SERVICE_CLIENT_SERECT ='oNLdfgTTx0IZYT8eXxy7d2-M'
-const  MAILING_SERVICE_REFRESH_TOKEN ='1//04ceXEq6azvGECgYIARAAGAQSNwF-L9Ir9HS2YOKvTo28BQ0lM2L-JJ5JUstJiXUtMPIYIOXDnvw4O3P_QkRe5gM863EKeZi5wlI'
-const  SENDER_EMAIL_ADDRESS ='17110082@student.hcmute.edu.vn'
+
+MAILING_SERVICE_CLIENT_ID = '859175353864-a9up0b121jn6la73r8ag7h2tkjspalnk.apps.googleusercontent.com'
+MAILING_SERVICE_CLIENT_SECRET = 'gEE-y3-haiVdjfDvkcRe82p0'
+MAILING_SERVICE_REFRESH_TOKEN = '1//04_oCnAgPow6_CgYIARAAGAQSNwF-L9IrQoJ9OMgag1dyn3qbDKFX8R9nAMhHBGI6D7DIgJAid98a7S0myh0AMvJTq1x_DW57Sv4'
+SENDER_EMAIL_ADDRESS = 'doanvietthuan1005@gmail.com'
 const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
 
 
 
 const oauth2Client = new OAuth2(
     MAILING_SERVICE_CLIENT_ID,
-    MAILING_SERVICE_CLIENT_SERECT,
+    MAILING_SERVICE_CLIENT_SECRET,
     MAILING_SERVICE_REFRESH_TOKEN,
     OAUTH_PLAYGROUND
 )
@@ -30,7 +31,7 @@ const sendEmail = (to, url, txt) => {
             type: 'OAuth2',
             user: SENDER_EMAIL_ADDRESS,
             clientId: MAILING_SERVICE_CLIENT_ID,
-            clientSecret: MAILING_SERVICE_CLIENT_SERECT,
+            clientSecret: MAILING_SERVICE_CLIENT_SECRET,
             refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
             accessToken
         }
@@ -39,7 +40,7 @@ const sendEmail = (to, url, txt) => {
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
         to: to,
-        subject: "PT",
+        subject: "TORO",
         html: `
             <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
             <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the PT SHOP.</h2>
